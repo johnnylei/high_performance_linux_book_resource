@@ -32,3 +32,22 @@
 - 32确认号(acknowledgment number):用作另一方发送来的tcp确认响应.值为:32位序号+1.
 - 4位头部长度
 - 6位标识位
+  - URG 表示紧急
+  - ACK 表示确认
+  - PSH 提醒接收端赶紧从缓冲区读取数据,为后续数据腾出空间
+  - RST 要求对方重新建立连接
+  - SYN 建立连接的3次握手
+  - FIN 取消连接的4次挥手
+- 16位窗口大小:告知对方本段缓冲区剩余空间大小,让对方控制发送数据的速度
+- 16位校验和:通过CRC算法来确认数据报是否有损坏
+- 16位紧急指针
+## tcp通信过程
+![img_3](https://github.com/johnnylei/high_performance_linux_book_resource/blob/master/resource/Screenshot%20from%202017-12-04%2023-20-50.png?raw=true)
+
+## tcp状态转移
+![img_4]()
+
+## 半关闭
+tcp是双向的,它可以单向关闭,发送关闭请求,之后不能发送数据,但是可以接受数据,直到对方也关闭连接为止
+
+> 其他不作为学习重点
