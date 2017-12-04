@@ -45,7 +45,7 @@
 ![img_3](https://github.com/johnnylei/high_performance_linux_book_resource/blob/master/resource/Screenshot%20from%202017-12-04%2023-20-50.png?raw=true)
 
 ## tcp状态转移
-![img_4]()
+![img_4](https://github.com/johnnylei/high_performance_linux_book_resource/blob/master/resource/Screenshot%20from%202017-12-04%2023-47-29.png?raw=true)
 
 ## 半关闭
 tcp是双向的,它可以单向关闭,发送关闭请求,之后不能发送数据,但是可以接受数据,直到对方也关闭连接为止
