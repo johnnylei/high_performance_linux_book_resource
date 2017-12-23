@@ -1,0 +1,1 @@
+tmp.o: tmp.c
