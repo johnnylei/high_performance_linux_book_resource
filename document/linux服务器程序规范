@@ -1,0 +1,13 @@
+## abstract
+- linux服务器一般以后台进程形式运行．后台程序又称之为守护进程(daemon),守护进程的父进程通常是init进程(PID=1)
+- 日志系统
+  - 输出到文件
+  - 输出到udp服务器
+  - 大部分进程都在/var/log目录下面记录自己的日志目录(root:syslog)
+- linux服务器一般已某个专门的非root身份运行，eg:mysqld, httpd, syslogd, 等后台进程，分别拥有自己的运行账户，mysql,apache,syslog
+- linux服务器通常是可以配置的，配置文件通常/etc下面
+- liunx服务器进程通常会在启动的时候生成一个pid文件，并存入/var/run目录中，以记录该后台进程的pid,比如syslogd的pid文件是/var/run/syslogd.pid
+- linux服务器进程通常需要考虑系统资源和限制，以预测自身能承受多大负荷，比如进程可用文件描述副总数和内存总量
+
+## 日志
+linux 提供的守护进程是syslogd, 现在用升级版rsyslogd
