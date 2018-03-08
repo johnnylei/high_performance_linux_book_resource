@@ -9,43 +9,18 @@
 - liunx服务器进程通常会在启动的时候生成一个pid文件，并存入/var/run目录中，以记录该后台进程的pid,比如syslogd的pid文件是/var/run/syslogd.pid
 - linux服务器进程通常需要考虑系统资源和限制，以预测自身能承受多大负荷，比如进程可用文件描述副总数和内存总量
 
-![img_1](https://github.com/johnnylei/high_performance_linux_book_resource/blob/master/resource/Screenshot%20from%202018-03-07%2013-24-26.png?raw=true)
 ## 日志
 linux 提供的守护进程是syslogd, 现在用升级版rsyslogd
 
-### syslog函数
-应用程序使用syslog函数与rsyslogd守护进程通信
-```
-#include <syslog.h>
-void syslog(int priority, const char * message, ...);
-void openlog(const char * ident, int logopt, int facility); // facility:设备，容易，能力
-int setlogmask(int maskpri);
-void closelog();
-```
+rsyslogd守护进程既能接收用户进程输出的日志，又能接收内核日志．用户进程是通过调用syslog函数生产系统日志的．该函数见日志输出到一个unix本地域socket类型(AF_UNIX)的文件/dev/log中，rsyslogd则监听该文件以获取用户进程的输出．
 
-## 用户信息
-#### UID, EUID(有效用户id), GID(真实组id), EGID(有效组ID)
-```
-#include <sys/types.h>
-#include <unistd.h>
+- 调试信息打印至/var/log/debug
+- 普通信息打印至/var/log/messages
+- 内核信息保存至/var/log/kern.log
 
-uid_t getuid();
-uid_t geteuid();
-gid_t getgid();
-get_t getegid();
-int setuid(uid_t uid);
-int seteuid(uid_t uid);
-int setgid(gid_t gid);
-int setegid(gid_t gid);
-```
-一个进程拥有两个用户id:UID 和EUID
-
-## 进程间关系
-### 进程组
-进程有进程组，因此除了有pid以外还有pgid
-```
-pid_t getpgid(pid_t pid);
-int setpgid(pid_t pgid);
-```
-
-### 会话
+rsyslogd的配置文件/etc/rsyslog.conf
+  - 日志路径
+  - 是否接收UDP日志及其监听端口
+  - 是否接受tcp日志及其监听端口
+  - 日志文件权限
+  - 包含那些子配置文件
